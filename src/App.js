@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from './components/Card';
 import Header from './components/Header'
+import useAppBadge from './hooks/useAppBadge';
 import shuffle from './utilities/shuffle';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
   const [pickTwo, setPickTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [wins, setWins] = useState(0);
-
+  const [setBadge, clearBadge] = useAppBadge();
   useEffect(() => {
     let pickTimer;
     if (pickOne && pickTwo) {
@@ -42,6 +43,7 @@ function App() {
       console.log('You win!');
       setWins(wins + 1);
       handleTurn();
+      setBadge();
       setCards(shuffle);
     }
   }, [cards, wins]);
